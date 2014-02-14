@@ -19,7 +19,6 @@ public class FightDeterminer {
 
         Fight fight = new Fight(dinosaur, opponent);
         List<FightAction> fightActions = dinosaur.getFightActions();
-
         List<FightAction> opponentFightActions = opponent.getFightActions();
 
         while (!fight.isOver()) {
@@ -32,6 +31,9 @@ public class FightDeterminer {
 
         return fight;
     }
+
+    // If we want the opponent to have AI, we should decouple it from the FightDeterminer.
+    // Poll the opponent for a response in the same way that we poll the user.
 
     private void userAttackSequence(Dinosaur dinosaur, Dinosaur opponent, List<FightAction> fightActions) {
         Menu menu = new Menu(console, fightActions);
@@ -51,8 +53,8 @@ public class FightDeterminer {
     }
 
     private void printAttackString(Dinosaur dinosaur, Dinosaur opponent, FightAction fightAction) {
-        console.print(dinosaur.getName() + " attacked " + opponent.getName() + " with " + fightAction.getName() + " for " + fightAction.getDamage() + " damage.");
-        console.print(opponent.getName() + " has " + opponent.getHealth() + " remaining health.");
+        //TODO:Add condition if not retreat
+        console.print(dinosaur.getName() + fightAction.onSuccessMessage());
         console.pause(1);
     }
 }

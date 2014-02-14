@@ -14,4 +14,6 @@ public interface FightAction extends Command {
     public void setFocus(Dinosaur opponent);
 
     public int getDamage();
+
+    public String onSuccessMessage();
 }

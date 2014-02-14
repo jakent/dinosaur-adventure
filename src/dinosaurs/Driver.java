@@ -27,7 +27,7 @@ public class Driver {
         menu.execute(menu.promptForOptionNumber());
         commands.remove(createCommand);
 
-        console.print("Now that you have your dinosaur. \n " +
+        console.print("Now that you have your dinosaur.\n" +
                 "It is time for your dinosaur to start gathering food so it will become strong.");
         DisplayDinosaurStatsCommand displayStatsCommand = new DisplayDinosaurStatsCommand(console, dinoRepo);
         GatherFoodCommand gatherFoodCommand = new GatherFoodCommand(console, dinoRepo);

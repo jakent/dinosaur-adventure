@@ -26,6 +26,9 @@ public class StartFightCommand implements Command{
         Fight fight = fightDeterminer.startFight(dinosaur, opponent);
         final Dinosaur winner = fight.getWinner();
         awardVictory(winner);
+        if (dinosaur.isRetreating()) {
+            dinosaur.standGround();
+        }
     }
 
     private void awardVictory(Dinosaur winner) {

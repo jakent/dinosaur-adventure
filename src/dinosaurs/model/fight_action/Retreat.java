@@ -1,25 +1,35 @@
 package dinosaurs.model.fight_action;
 
 import dinosaurs.model.Dinosaur;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class Retreat implements FightAction {
+
+    private Dinosaur dinosaur;
+
     @Override
     public String getName() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return "Retreat";
     }
 
     @Override
     public void execute() {
-        //To change body of implemented methods use File | Settings | File Templates.
+        dinosaur.retreat();
     }
 
     @Override
     public void setFocus(Dinosaur opponent) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        //Do nothing
     }
 
     @Override
     public int getDamage() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return 0;
+    }
+
+    @Override
+    public String onSuccessMessage() {
+        return " retreated like a coward.";
     }
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.fight_action.Attack;
 import dinosaurs.model.fight_action.FightAction;
+import dinosaurs.model.fight_action.Retreat;
 
 import java.util.List;
 
@@ -11,14 +12,22 @@ public class DinosaurFactory {
     public static final int DEFAULT_HEALTH = 100;
     public static final int DEFAULT_DAMAGE = 30;
 
-    private static FightAction defaultFightAction = new Attack("Slash", DEFAULT_DAMAGE);
+    private static FightAction defaultAttack = new Attack("Slash", DEFAULT_DAMAGE);
+    private static Dinosaur dinosaur;
+    private static FightAction retreat;
 
     public static Dinosaur create(String dinoName) {
-        return new Dinosaur(dinoName, Lists.newArrayList(defaultFightAction), 0, DEFAULT_HEALTH);
+        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), 0, DEFAULT_HEALTH);
+        retreat = new Retreat(dinosaur);
+        dinosaur.addFightAction(retreat);
+        return dinosaur;
     }
 
     public static Dinosaur create(String dinoName, int exp) {
-        return new Dinosaur(dinoName, Lists.newArrayList(defaultFightAction), exp, DEFAULT_HEALTH);
+        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), exp, DEFAULT_HEALTH);
+        retreat = new Retreat(dinosaur);
+        dinosaur.addFightAction(retreat);
+        return dinosaur;
     }
 
     public static Dinosaur create(String dinoName, List<FightAction> fightActions) {
@@ -26,6 +35,10 @@ public class DinosaurFactory {
     }
 
     public static Dinosaur createWithHealth(String dinoName, int health) {
-        return new Dinosaur(dinoName, Lists.newArrayList(defaultFightAction), 0, health);
+        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), 0, health);
+        retreat = new Retreat(dinosaur);
+        dinosaur.addFightAction(retreat);
+        return dinosaur;
+
     }
 }

@@ -31,4 +31,10 @@ public class Attack implements FightAction {
     public int getDamage() {
         return damage;
     }
+
+    @Override
+    public String onSuccessMessage() {
+        return " attacked " + opponent.getName() + " with " + name + " for " + damage + " damage.\n" +
+            opponent.getName() + " has " + opponent.getHealth() + " remaining health.";
+    }
 }

@@ -12,23 +12,23 @@ public class Fight {
     }
 
     public boolean isOver() {
-        winner = determinWinner();
-        return determinProgress();
+        winner = determineWinner();
+        return determineProgress();
     }
 
     public Dinosaur getWinner() {
-        return determinWinner();
+        return determineWinner();
     }
 
-    private boolean determinProgress() {
+    private boolean determineProgress() {
         return winner != null;
     }
 
-    private Dinosaur determinWinner() {
+    private Dinosaur determineWinner() {
         Dinosaur winner = null;
-        if (dinosaur1.isDead()) {
+        if (dinosaur1.isDead() || dinosaur1.isRetreating()) {
             winner = dinosaur2;
-        } else if (dinosaur2.isDead()) {
+        } else if (dinosaur2.isDead() || dinosaur2.isRetreating()) {
             winner = dinosaur1;
         }
         return winner;

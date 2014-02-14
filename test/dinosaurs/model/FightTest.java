@@ -23,4 +23,13 @@ public class FightTest {
         final Fight underTest = new Fight(dinoOne, dinoTwo);
         assertFalse(underTest.isOver());
     }
+
+    @Test
+    public void shouldDetermineIfDinoRetreats() {
+        final Dinosaur dinoOne = DinosaurFactory.create("dinoOne");
+        dinoOne.retreat();
+        final Dinosaur dinoTwo = DinosaurFactory.create("dinoTwo");
+        final Fight underTest = new Fight(dinoOne, dinoTwo);
+        assertTrue(underTest.isOver());
+    }
 }

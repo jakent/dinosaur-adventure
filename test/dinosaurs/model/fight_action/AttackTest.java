@@ -17,7 +17,6 @@ public class AttackTest {
     public void setup() {
         attackName = "test";
         underTest = new Attack(attackName, DAMAGE);
-
     }
 
     @Test
