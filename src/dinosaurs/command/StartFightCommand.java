@@ -31,6 +31,10 @@ public class StartFightCommand implements Command{
         }
     }
 
+    public void update() {
+        opponent.heal();
+    }
+
     private void awardVictory(Dinosaur winner) {
         winner.incrementExp(5);
         console.print(winner.getName() + " wins the fight!");

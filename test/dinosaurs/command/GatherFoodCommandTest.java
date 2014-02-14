@@ -27,7 +27,7 @@ public class GatherFoodCommandTest {
 
     @Before
     public void setup() {
-        dinosaur = DinosaurFactory.create("test", 0);
+        dinosaur = DinosaurFactory.createWithExp("test", 0);
         when(dinoRepo.getDinosaur()).thenReturn(dinosaur);
     }
 

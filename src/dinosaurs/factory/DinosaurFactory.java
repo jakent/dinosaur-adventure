@@ -23,7 +23,7 @@ public class DinosaurFactory {
         return dinosaur;
     }
 
-    public static Dinosaur create(String dinoName, int exp) {
+    public static Dinosaur createWithExp(String dinoName, int exp) {
         dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), exp, DEFAULT_HEALTH);
         retreat = new Retreat(dinosaur);
         dinosaur.addFightAction(retreat);
