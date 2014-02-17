@@ -1,6 +1,7 @@
 package dinosaurs.command;
 
 import dinosaurs.dal.DinosaurRepository;
+import dinosaurs.factory.DinosaurFactory;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
@@ -31,8 +32,8 @@ public class StartFightCommand implements Command{
         }
     }
 
-    public void update() {
-        opponent.heal();
+    public void updateOpponent() {
+        opponent = DinosaurFactory.createEqualOpponent(dinosaurRepository.getDinosaur());
     }
 
     private void awardVictory(Dinosaur winner) {

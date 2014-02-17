@@ -1,11 +1,17 @@
 package dinosaurs;
 
+import dinosaurs.command.CommandList;
+import dinosaurs.dal.DinosaurRepository;
+import dinosaurs.dal.InMemoryDinosaurRepository;
 import dinosaurs.io.Console;
 
 public class Driver {
     public static void main(String[] args){
-        Console console = new Console(System.in, System.out);
-        Game game = new Game(console);
+        final Console console = new Console(System.in, System.out);
+        final DinosaurRepository dinosaurRepository = new InMemoryDinosaurRepository();
+        final CommandList commandList = new CommandList(console, dinosaurRepository);
+
+        final Game game = new Game(console, commandList);
 
         console.print("Welcome to Dino Destruction!");
 
@@ -16,5 +22,7 @@ public class Driver {
 
         game.loop();
 
+        console.print("Your dinosaur has died.\n" +
+                "Game Over");
     }
 }

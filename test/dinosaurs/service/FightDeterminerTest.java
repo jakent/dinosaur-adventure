@@ -63,12 +63,4 @@ public class FightDeterminerTest {
         assertTrue(otherDino.getHealth() == initialOtherHealth - damage);
         assertTrue(userDino.getHealth() == initialUserHealth);
     }
-
-    @Test
-    public void shouldBeAttackedByOpponent() {
-        final int initialHealth = userDino.getHealth();
-        underTest.startFight(userDino, otherDino);
-        assertTrue(userDino.getHealth() < initialHealth);
-    }
-
 }

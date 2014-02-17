@@ -3,6 +3,7 @@ package dinosaurs.factory;
 import com.google.common.collect.Lists;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.fight_action.Attack;
+import dinosaurs.model.fight_action.Block;
 import dinosaurs.model.fight_action.FightAction;
 import dinosaurs.model.fight_action.Retreat;
 
@@ -40,5 +41,14 @@ public class DinosaurFactory {
         dinosaur.addFightAction(retreat);
         return dinosaur;
 
+    }
+
+    public static Dinosaur createEqualOpponent(Dinosaur dinosaur) {
+        dinosaur = new Dinosaur("opponent", Lists.newArrayList(defaultAttack), dinosaur.getExp(), 100);
+        retreat = new Retreat(dinosaur);
+        dinosaur.addFightAction(retreat);
+        Block block = new Block(dinosaur);
+        dinosaur.addFightAction(block);
+        return dinosaur;
     }
 }

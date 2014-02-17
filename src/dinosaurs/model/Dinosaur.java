@@ -2,28 +2,34 @@ package dinosaurs.model;
 
 import dinosaurs.model.fight_action.FightAction;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
 public class Dinosaur {
-    private int increment = 1;
-
+    @Getter
     private final String name;
+    @Getter
     private final List<FightAction> fightActions;
+    private int increment = 1;
+    @Getter
     private int exp;
+    @Getter
+    private int level;
     private int maxHealth;
     private int health;
     private boolean retreating;
+    private boolean blocking;
 
     public Dinosaur(String dinoName, List<FightAction> fightActions, int exp, int health) {
-        //TODO: lombok should do this for us
         this.name = dinoName;
         this.fightActions = fightActions;
         this.exp = exp;
         this.health = health;
         maxHealth = health;
         retreating = false;
+        level = 1;
+        blocking = false;
     }
 
     public void incrementExp() {
@@ -38,8 +44,13 @@ public class Dinosaur {
         return health <= 0;
     }
 
-    public void injure(int damage) {
+    public boolean injure(int damage) {
+        if (blocking) {
+            this.blocking = false;
+            return false;
+        }
         health -= damage;
+        return true;
     }
 
     public void heal() {
@@ -62,11 +73,25 @@ public class Dinosaur {
         fightActions.add(action);
     }
 
+    public int getHealth() {
+        health = (health < 0) ? 0 : health;
+        return health;
+    }
+
     @Override
     public String toString() {
         return name + "'s stats: \n" +
                 "\t health: " + Integer.toString(health) + "\n" +
-                "\t exp: " + Integer.toString(exp);
+                "\t experience: " + Integer.toString(exp) + "\n" +
+                "\t level: " + Integer.toString(level);
 
+    }
+
+    public void levelUp() {
+        level++;
+    }
+
+    public void blockAttack() {
+        this.blocking = true;
     }
 }

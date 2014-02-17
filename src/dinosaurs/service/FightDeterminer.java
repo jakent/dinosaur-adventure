@@ -1,6 +1,7 @@
 package dinosaurs.service;
 
 import dinosaurs.Menu;
+import dinosaurs.OpponentMenu;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
@@ -17,43 +18,34 @@ public class FightDeterminer {
 
     public Fight startFight(Dinosaur dinosaur, Dinosaur opponent) {
 
-        Fight fight = new Fight(dinosaur, opponent);
-        List<FightAction> fightActions = dinosaur.getFightActions();
-        List<FightAction> opponentFightActions = opponent.getFightActions();
+        final Fight fight = new Fight(dinosaur, opponent);
+        final List<FightAction> fightActions = dinosaur.getFightActions();
+        final List<FightAction> opponentFightActions = opponent.getFightActions();
 
+        Menu menu;
         while (!fight.isOver()) {
-            userAttackSequence(dinosaur, opponent, fightActions);
+            menu = new Menu(console, fightActions);
+            attackSequence(dinosaur, opponent, fightActions, menu);
             if (fight.isOver()) {
                 break;
             }
-            opponentAttackSequence(dinosaur, opponent, opponentFightActions);
+            menu = new OpponentMenu(console, opponentFightActions);
+            attackSequence(opponent, dinosaur, opponentFightActions, menu);
         }
 
         return fight;
     }
 
-    // If we want the opponent to have AI, we should decouple it from the FightDeterminer.
-    // Poll the opponent for a response in the same way that we poll the user.
-
-    private void userAttackSequence(Dinosaur dinosaur, Dinosaur opponent, List<FightAction> fightActions) {
-        Menu menu = new Menu(console, fightActions);
+    private void attackSequence(Dinosaur dinosaur, Dinosaur opponent, List<FightAction> fightActions, Menu menu) {
         menu.displayOptions();
         final int prompt = menu.promptForOptionNumber();
         final FightAction fightAction = fightActions.get(prompt);
         fightAction.setFocus(opponent);
         menu.execute(prompt);
-        printAttackString(dinosaur, opponent, fightAction);
+        printAttackString(dinosaur, fightAction);
     }
 
-    private void opponentAttackSequence(Dinosaur dinosaur, Dinosaur opponent, List<FightAction> opponentFightActions) {
-        final FightAction opponentFightAction = opponentFightActions.get(SMARTLY_CHOSEN_ATTACK);
-        opponentFightAction.setFocus(dinosaur);
-        opponentFightAction.execute();
-        printAttackString(opponent, dinosaur, opponentFightAction);
-    }
-
-    private void printAttackString(Dinosaur dinosaur, Dinosaur opponent, FightAction fightAction) {
-        //TODO:Add condition if not retreat
+    private void printAttackString(Dinosaur dinosaur, FightAction fightAction) {
         console.print(dinosaur.getName() + fightAction.onSuccessMessage());
         console.pause(1);
     }

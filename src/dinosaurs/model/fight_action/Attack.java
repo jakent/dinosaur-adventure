@@ -1,11 +1,14 @@
 package dinosaurs.model.fight_action;
 
 import dinosaurs.model.Dinosaur;
+import lombok.Getter;
 
 public class Attack implements FightAction {
     private final String name;
     private final int damage;
+    @Getter
     private Dinosaur opponent;
+    private boolean attackSuccessfull;
 
     public Attack(String attackName, int damage) {
         name = attackName;
@@ -19,7 +22,7 @@ public class Attack implements FightAction {
 
     @Override
     public void execute() {
-        opponent.injure(damage);
+        attackSuccessfull = opponent.injure(damage);
     }
 
     @Override
@@ -34,7 +37,11 @@ public class Attack implements FightAction {
 
     @Override
     public String onSuccessMessage() {
-        return " attacked " + opponent.getName() + " with " + name + " for " + damage + " damage.\n" +
-            opponent.getName() + " has " + opponent.getHealth() + " remaining health.";
+        String returnStr = " attacked " + opponent.getName() + " with " + name + " for " + damage + " damage.\n";
+        if (attackSuccessfull)
+            returnStr += opponent.getName() + " has " + opponent.getHealth() + " remaining health.";
+        else
+            returnStr += opponent.getName() + " blocked the attack and has  " + opponent.getHealth() + " remaining health.";
+        return returnStr;
     }
 }

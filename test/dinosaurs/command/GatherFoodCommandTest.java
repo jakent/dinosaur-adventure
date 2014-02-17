@@ -45,6 +45,6 @@ public class GatherFoodCommandTest {
     @Test
     public void shouldPauseConsoleOutputToMakeUserWait() {
         underTest.execute();
-        verify(console, times(3)).pause(1);
+        verify(console, atLeastOnce()).pause(1);
     }
 }

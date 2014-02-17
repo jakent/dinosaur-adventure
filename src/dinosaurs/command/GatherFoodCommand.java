@@ -24,8 +24,6 @@ public class GatherFoodCommand implements Command{
         console.print(dinosaur.getName() + " is gathering food..");
         console.pause(1);
         console.print(dinosaur.getName() + " is gathering food...");
-        console.pause(1);
-        console.print(dinosaur.getName() + " is feeling stronger!");
 
         dinosaur.incrementExp();
     }

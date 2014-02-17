@@ -1,8 +1,8 @@
 package dinosaurs;
 
+import dinosaurs.command.Command;
 import dinosaurs.io.Console;
 import lombok.AllArgsConstructor;
-import dinosaurs.command.Command;
 
 import java.util.List;
 

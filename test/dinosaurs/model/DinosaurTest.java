@@ -41,4 +41,20 @@ public class DinosaurTest {
         underTest.heal();
         assertEquals(underTest.getHealth(), TOTAL_HEALTH);
     }
+
+    @Test
+    public void shouldNotHaveHealthBelowZero() {
+        underTest = DinosaurFactory.createWithHealth("pawn", -2);
+        assertEquals(underTest.getHealth(), 0);
+    }
+
+    @Test
+    public void shouldBlockAttack() {
+        final int initialHealth = underTest.getHealth();
+        underTest.blockAttack();
+        underTest.injure(3);
+        assertTrue(underTest.getHealth() == initialHealth);
+        underTest.injure(3);
+        assertTrue(underTest.getHealth() == initialHealth - 3);
+    }
 }
