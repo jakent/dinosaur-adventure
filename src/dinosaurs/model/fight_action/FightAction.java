@@ -6,14 +6,14 @@ import dinosaurs.model.Dinosaur;
 public interface FightAction extends Command {
 
     @Override
-    public String getName();
+    String getName();
 
     @Override
-    public void execute();
+    void execute();
 
-    public void setFocus(Dinosaur opponent);
+    void setFocus(Dinosaur opponent);
 
-    public int getDamage();
+    int getDamage();
 
-    public String onSuccessMessage();
+    String onSuccessMessage();
 }

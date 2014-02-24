@@ -20,6 +20,7 @@ public class Menu {
         }
     }
 
+    //TODO: return command, not int
     public int promptForOptionNumber() {
         int input;
         input = console.ask();

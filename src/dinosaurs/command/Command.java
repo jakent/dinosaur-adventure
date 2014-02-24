@@ -2,7 +2,7 @@ package dinosaurs.command;
 
 public interface Command {
 
-    public String getName();
+    String getName();
 
-    public void execute();
+    void execute();
 }

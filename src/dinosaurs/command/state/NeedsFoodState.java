@@ -11,7 +11,7 @@ public class NeedsFoodState implements State {
 
     private final Console console;
     private final DinosaurRepository dinoRepo;
-    List<Command> commands;
+    final List<Command> commands;
 
     public NeedsFoodState(Console console, DinosaurRepository dinoRepo, List<Command> commands) {
         this.console = console;

@@ -2,7 +2,9 @@ package dinosaurs.model.fight_action;
 
 import dinosaurs.model.Dinosaur;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
 @AllArgsConstructor
 public class Retreat implements FightAction {
 

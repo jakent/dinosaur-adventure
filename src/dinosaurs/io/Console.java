@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Console {
 
-    private Scanner in;
-    private PrintStream out;
+    private final Scanner in;
+    private final PrintStream out;
 
     public Console(InputStream in, PrintStream out) {
         this.in = new Scanner(in);

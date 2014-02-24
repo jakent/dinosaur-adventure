@@ -10,7 +10,7 @@ public class ExitGameCommand  implements Command {
 
     @Override
     public void execute() {
-        //TODO:dont use sys.exit
+        //TODO:don't use sys.exit
         System.exit(0);
     }
 }

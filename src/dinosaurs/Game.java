@@ -12,11 +12,11 @@ public class Game {
 
     private final Console console;
     private final CommandList commandList;
+
     private Menu menu;
-    private List<Command> commands;
 
     public void chooseDinosaur() {
-        commands = commandList.prepareChooseDinosaur();
+        List<Command> commands = commandList.prepareChooseDinosaur();
 
         menu = new Menu(console, commands);
         menu.displayOptions();

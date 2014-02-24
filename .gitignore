@@ -1,3 +1,6 @@
-out/*
+out
 DinosaurFighter.iml
-.idea/*
+.idea
+.DS_Store
+.sonar
+*sonar*

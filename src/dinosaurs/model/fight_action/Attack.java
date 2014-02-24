@@ -8,7 +8,7 @@ public class Attack implements FightAction {
     private final int damage;
     @Getter
     private Dinosaur opponent;
-    private boolean attackSuccessfull;
+    private boolean attackSuccessful;
 
     public Attack(String attackName, int damage) {
         name = attackName;
@@ -22,7 +22,7 @@ public class Attack implements FightAction {
 
     @Override
     public void execute() {
-        attackSuccessfull = opponent.injure(damage);
+        attackSuccessful = opponent.injure(damage);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Attack implements FightAction {
     @Override
     public String onSuccessMessage() {
         String returnStr = " attacked " + opponent.getName() + " with " + name + " for " + damage + " damage.\n";
-        if (attackSuccessfull)
+        if (attackSuccessful)
             returnStr += opponent.getName() + " has " + opponent.getHealth() + " remaining health.";
         else
             returnStr += opponent.getName() + " blocked the attack and has  " + opponent.getHealth() + " remaining health.";

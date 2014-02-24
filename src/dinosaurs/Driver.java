@@ -16,13 +16,14 @@ public class Driver {
         console.print("Welcome to Dino Destruction!");
 
         game.chooseDinosaur();
+        final String dinoName = dinosaurRepository.getDinosaur().getName();
 
-        console.print("Now that you have your dinosaur.\n" +
-                "It is time for your dinosaur to start gathering food so it will become strong.");
+        console.print("Now that you have " + dinoName + ".\n" +
+                "It is time " + dinoName + " to start gathering food so it will become strong.");
 
         game.loop();
 
-        console.print("Your dinosaur has died.\n" +
+        console.print(dinoName + " has died.\n" +
                 "Game Over");
     }
 }

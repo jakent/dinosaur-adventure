@@ -1,7 +1,6 @@
 package dinosaurs.model;
 
 import dinosaurs.model.fight_action.FightAction;
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
@@ -11,12 +10,11 @@ public class Dinosaur {
     private final String name;
     @Getter
     private final List<FightAction> fightActions;
-    private int increment = 1;
     @Getter
     private int exp;
     @Getter
     private int level;
-    private int maxHealth;
+    private final int maxHealth;
     private int health;
     private boolean retreating;
     private boolean blocking;
@@ -37,6 +35,7 @@ public class Dinosaur {
     }
 
     public void incrementExp(int magnitude) {
+        int increment = 1;
         exp += increment * magnitude;
     }
 
@@ -93,5 +92,9 @@ public class Dinosaur {
 
     public void blockAttack() {
         this.blocking = true;
+    }
+
+    public void resetBlock() {
+        this.blocking = false;
     }
 }

@@ -1,11 +1,12 @@
 package dinosaurs.command;
 
-import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.factory.DinosaurFactory;
+import dinosaurs.factory.PlayerFactory;
+import dinosaurs.factory.StartFightCommandFactory;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
-import dinosaurs.model.fight_action.FightAction;
+import dinosaurs.model.Player;
 import dinosaurs.service.FightDeterminer;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,16 +21,13 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StartFightCommandTest {
+    public static final String WINS = " wins";
     @Mock
     private Console console;
     @Mock
-    private DinosaurRepository dinoRepo;
-    @Mock
     private FightDeterminer fightDeterminer;
-    @Mock
-    private FightAction fightAction;
 
-    private Dinosaur opponent;
+    private Dinosaur opponentDino;
 
     private StartFightCommand underTest;
     private Dinosaur dino;
@@ -37,12 +35,13 @@ public class StartFightCommandTest {
     @Before
     public void setup() {
         dino = DinosaurFactory.create("test-dino");
-        when(dinoRepo.getDinosaur()).thenReturn(dino);
+        opponentDino = DinosaurFactory.create("test-opponentDino");
+        Player user = PlayerFactory.createUserPlayer(dino, console);
+        Player opponent = PlayerFactory.createOpponentPlayer(opponentDino, console);
         when(console.ask()).thenReturn(1);
 
-        opponent = DinosaurFactory.create("test-opponent");
 
-        underTest = new StartFightCommand(console, dinoRepo, fightDeterminer, opponent);
+        underTest = StartFightCommandFactory.createFight(console, fightDeterminer, user, opponent);
     }
 
     @Test
@@ -53,15 +52,15 @@ public class StartFightCommandTest {
     @Test
     public void shouldPrintWinningMessage() {
         Fight fight = buildEndedFight(dino);
-        when(fightDeterminer.startFight(dino, opponent)).thenReturn(fight);
+        when(fightDeterminer.startFight(any(Player.class), any(Player.class))).thenReturn(fight);
         underTest.execute();
-        verify(console).print(contains(dino.getName() + " wins"));
+        verify(console).print(contains(dino.getName() + WINS));
     }
 
     @Test
     public void shouldGainExpAfterWinning() {
         Fight fight = buildEndedFight(dino);
-        when(fightDeterminer.startFight(dino, opponent)).thenReturn(fight);
+        when(fightDeterminer.startFight(any(Player.class), any(Player.class))).thenReturn(fight);
         final int oldExp = dino.getExp();
         underTest.execute();
         assertTrue(dino.getExp() > oldExp);
@@ -69,10 +68,10 @@ public class StartFightCommandTest {
 
     @Test
     public void shouldPrintLosingMessage() {
-        Fight fight = buildEndedFight(opponent);
-        when(fightDeterminer.startFight(dino, opponent)).thenReturn(fight);
+        Fight fight = buildEndedFight(opponentDino);
+        when(fightDeterminer.startFight(any(Player.class), any(Player.class))).thenReturn(fight);
         underTest.execute();
-        verify(console).print(contains(opponent.getName() + " wins"));
+        verify(console).print(contains(opponentDino.getName() + WINS));
     }
 
     private Fight buildEndedFight(Dinosaur winner) {

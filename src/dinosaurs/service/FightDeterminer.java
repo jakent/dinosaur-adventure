@@ -1,48 +1,50 @@
 package dinosaurs.service;
 
 import dinosaurs.Menu;
-import dinosaurs.OpponentMenu;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
+import dinosaurs.model.Player;
 import dinosaurs.model.fight_action.FightAction;
 import lombok.AllArgsConstructor;
-
-import java.util.List;
 
 @AllArgsConstructor
 public class FightDeterminer {
 
-    public static final int SMARTLY_CHOSEN_ATTACK = 0;
-    private Console console;
+    private final Console console;
 
-    public Fight startFight(Dinosaur dinosaur, Dinosaur opponent) {
+    public Fight startFight(Player user, Player opponent) {
+        final Fight fight = new Fight(user.getDinosaur(), opponent.getDinosaur());
 
-        final Fight fight = new Fight(dinosaur, opponent);
-        final List<FightAction> fightActions = dinosaur.getFightActions();
-        final List<FightAction> opponentFightActions = opponent.getFightActions();
+        boolean userGoesNext = true;
 
-        Menu menu;
         while (!fight.isOver()) {
-            menu = new Menu(console, fightActions);
-            attackSequence(dinosaur, opponent, fightActions, menu);
-            if (fight.isOver()) {
-                break;
-            }
-            menu = new OpponentMenu(console, opponentFightActions);
-            attackSequence(opponent, dinosaur, opponentFightActions, menu);
+            userGoesNext = nextTurn(user, opponent, userGoesNext);
         }
 
         return fight;
     }
 
-    private void attackSequence(Dinosaur dinosaur, Dinosaur opponent, List<FightAction> fightActions, Menu menu) {
+    private boolean nextTurn(Player userPrompter, Player opponentPrompter, boolean userGoesNext) {
+        if (userGoesNext) {
+            attackSequence(userPrompter, opponentPrompter.getDinosaur());
+            return false;
+        }
+        attackSequence(opponentPrompter, userPrompter.getDinosaur());
+        return true;
+    }
+
+    private void attackSequence(Player attackerPrompter, Dinosaur defender) {
+        final Dinosaur attacker = attackerPrompter.getDinosaur();
+        final Menu menu = attackerPrompter.getMenu();
+
         menu.displayOptions();
         final int prompt = menu.promptForOptionNumber();
-        final FightAction fightAction = fightActions.get(prompt);
-        fightAction.setFocus(opponent);
+        final FightAction fightAction = attacker.getFightActions().get(prompt);
+        fightAction.setFocus(defender);
         menu.execute(prompt);
-        printAttackString(dinosaur, fightAction);
+        printAttackString(attacker, fightAction);
+        defender.resetBlock();
     }
 
     private void printAttackString(Dinosaur dinosaur, FightAction fightAction) {

@@ -1,54 +1,58 @@
 package dinosaurs.factory;
 
-import com.google.common.collect.Lists;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.fight_action.Attack;
-import dinosaurs.model.fight_action.Block;
 import dinosaurs.model.fight_action.FightAction;
 import dinosaurs.model.fight_action.Retreat;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class DinosaurFactory {
     public static final int DEFAULT_HEALTH = 100;
     public static final int DEFAULT_DAMAGE = 30;
 
-    private static FightAction defaultAttack = new Attack("Slash", DEFAULT_DAMAGE);
-    private static Dinosaur dinosaur;
-    private static FightAction retreat;
+    private static final FightAction defaultAttack = new Attack("Slash", DEFAULT_DAMAGE);
+
+    public DinosaurFactory() {
+    }
 
     public static Dinosaur create(String dinoName) {
-        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), 0, DEFAULT_HEALTH);
-        retreat = new Retreat(dinosaur);
+        final Dinosaur dinosaur = new Dinosaur(dinoName, newArrayList(defaultAttack), 0, DEFAULT_HEALTH);
+        final Retreat retreat = new Retreat(dinosaur);
         dinosaur.addFightAction(retreat);
         return dinosaur;
     }
 
     public static Dinosaur createWithExp(String dinoName, int exp) {
-        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), exp, DEFAULT_HEALTH);
-        retreat = new Retreat(dinosaur);
+        final Dinosaur dinosaur = new Dinosaur(dinoName, newArrayList(defaultAttack), exp, DEFAULT_HEALTH);
+        final Retreat retreat = new Retreat(dinosaur);
         dinosaur.addFightAction(retreat);
         return dinosaur;
     }
 
-    public static Dinosaur create(String dinoName, List<FightAction> fightActions) {
+    public static Dinosaur createWithFightActions(String dinoName, List<FightAction> fightActions) {
         return new Dinosaur(dinoName, fightActions, 0, DEFAULT_HEALTH);
     }
 
     public static Dinosaur createWithHealth(String dinoName, int health) {
-        dinosaur = new Dinosaur(dinoName, Lists.newArrayList(defaultAttack), 0, health);
-        retreat = new Retreat(dinosaur);
+        final Dinosaur dinosaur = new Dinosaur(dinoName, newArrayList(defaultAttack), 0, health);
+        final Retreat retreat = new Retreat(dinosaur);
         dinosaur.addFightAction(retreat);
         return dinosaur;
-
     }
 
-    public static Dinosaur createEqualOpponent(Dinosaur dinosaur) {
-        dinosaur = new Dinosaur("opponent", Lists.newArrayList(defaultAttack), dinosaur.getExp(), 100);
-        retreat = new Retreat(dinosaur);
-        dinosaur.addFightAction(retreat);
-        Block block = new Block(dinosaur);
-        dinosaur.addFightAction(block);
+    public static Dinosaur createEqualOpponent(Dinosaur userDino) {
+        final ArrayList<FightAction> actions = newArrayList(userDino.getFightActions());
+        final Dinosaur dinosaur = new Dinosaur("Doctor Opponent", actions, userDino.getExp(), 100);
+        final Retreat userDinoRetreat = new Retreat(userDino);
+        if (userDino.getFightActions().contains(userDinoRetreat)) {
+            dinosaur.getFightActions().remove(userDinoRetreat);
+            final Retreat retreat = new Retreat(dinosaur);
+            dinosaur.addFightAction(retreat);
+        }
         return dinosaur;
     }
 }

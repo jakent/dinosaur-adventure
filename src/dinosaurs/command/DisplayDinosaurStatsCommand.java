@@ -6,8 +6,8 @@ import dinosaurs.model.Dinosaur;
 
 public class DisplayDinosaurStatsCommand implements Command{
 
-    private DinosaurRepository dinosaurRepository;
-    private Console console;
+    private final DinosaurRepository dinosaurRepository;
+    private final Console console;
 
     public DisplayDinosaurStatsCommand(Console console, DinosaurRepository dinosaurRepository) {
         this.dinosaurRepository = dinosaurRepository;

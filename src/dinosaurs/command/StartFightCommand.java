@@ -1,10 +1,11 @@
 package dinosaurs.command;
 
-import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.factory.DinosaurFactory;
+import dinosaurs.factory.PlayerFactory;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
+import dinosaurs.model.Player;
 import dinosaurs.service.FightDeterminer;
 import lombok.AllArgsConstructor;
 
@@ -12,9 +13,9 @@ import lombok.AllArgsConstructor;
 public class StartFightCommand implements Command{
 
     private final Console console;
-    private final DinosaurRepository dinosaurRepository;
     private final FightDeterminer fightDeterminer;
-    private Dinosaur opponent;
+    private final Player user;
+    private Player opponent;
 
     @Override
     public String getName() {
@@ -23,8 +24,9 @@ public class StartFightCommand implements Command{
 
     @Override
     public void execute() {
-        final Dinosaur dinosaur = dinosaurRepository.getDinosaur();
-        Fight fight = fightDeterminer.startFight(dinosaur, opponent);
+        Dinosaur dinosaur = user.getDinosaur();
+
+        Fight fight = fightDeterminer.startFight(user, opponent);
         final Dinosaur winner = fight.getWinner();
         awardVictory(winner);
         if (dinosaur.isRetreating()) {
@@ -33,7 +35,8 @@ public class StartFightCommand implements Command{
     }
 
     public void updateOpponent() {
-        opponent = DinosaurFactory.createEqualOpponent(dinosaurRepository.getDinosaur());
+        Dinosaur dinosaur = user.getDinosaur();
+        opponent = PlayerFactory.createOpponentPlayer(DinosaurFactory.createEqualOpponent(dinosaur), console);
     }
 
     private void awardVictory(Dinosaur winner) {

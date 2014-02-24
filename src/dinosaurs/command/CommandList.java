@@ -3,15 +3,15 @@ package dinosaurs.command;
 import dinosaurs.command.state.NeedsFoodState;
 import dinosaurs.command.state.State;
 import dinosaurs.dal.DinosaurRepository;
-import dinosaurs.factory.DinosaurFactory;
+import dinosaurs.factory.StartFightCommandFactory;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.fight_action.Block;
 import dinosaurs.model.fight_action.FightAction;
-import dinosaurs.service.FightDeterminer;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -38,20 +38,14 @@ public class CommandList {
         commands.remove(createCommand);
 
         Command displayStatsCommand = new DisplayDinosaurStatsCommand(console, dinoRepo);
-        Command gatherFoodCommand = new GatherFoodCommand(console, dinoRepo);
-        startFightCommand = setupFightCommand();
+        Command gatherFoodCommand = new GatherFoodCommand(console, dinoRepo, new Random());
+        startFightCommand = StartFightCommandFactory.createUserInitiatedFight(console, dinoRepo);
 
         commands.add(0, displayStatsCommand);
         commands.add(1, gatherFoodCommand);
         commands.add(2, startFightCommand);
 
         currentState = new NeedsFoodState(console, dinoRepo, commands);
-    }
-
-    private StartFightCommand setupFightCommand(){
-        Dinosaur opponent = DinosaurFactory.createWithExp("opponent", 0);
-        final FightDeterminer fightDeterminer = new FightDeterminer(console);
-        return new StartFightCommand(console, dinoRepo, fightDeterminer, opponent);
     }
 
     public void update(int lastExecutedCommand) {
