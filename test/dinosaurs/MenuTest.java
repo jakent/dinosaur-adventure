@@ -1,7 +1,7 @@
 package dinosaurs;
 
 import dinosaurs.command.Command;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +21,7 @@ public class MenuTest {
     public static final String OPTION_TWO = "optionTwo";
     public static final String OPTION_THREE = "optionThree";
     @Mock
-    private Console console;
+    private DefaultConsole console;
     @Mock
     private Command option;
     @Mock

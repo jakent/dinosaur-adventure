@@ -19,8 +19,7 @@ public class CreateDinosaurCommand implements Command {
     @Override
     public void execute() {
         String input = console.prompt("Enter the name of your dinosaur:");
-        dinoRepo.createDinosaur(DinosaurFactory.create(input));
+        dinoRepo.insertDinosaur(DinosaurFactory.create(input));
         console.print("You have created a dinosaur named \"" + input + "\"");
-
     }
 }

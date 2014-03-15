@@ -22,7 +22,7 @@ public class InMemoryDinosaurRepositoryTest {
 
     @Test
     public void shouldAddDinoAndRetrieveIt() {
-        underTest.createDinosaur(DINO);
+        underTest.insertDinosaur(DINO);
         assertEquals(underTest.getDinosaur(), DINO);
     }
 

@@ -4,7 +4,7 @@ import dinosaurs.model.Dinosaur;
 
 public interface DinosaurRepository {
 
-    void createDinosaur(Dinosaur dino);
+    void insertDinosaur(Dinosaur dino);
 
     Dinosaur getDinosaur();
 }

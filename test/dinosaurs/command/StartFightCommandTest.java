@@ -3,7 +3,7 @@ package dinosaurs.command;
 import dinosaurs.factory.DinosaurFactory;
 import dinosaurs.factory.PlayerFactory;
 import dinosaurs.factory.StartFightCommandFactory;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
 import dinosaurs.model.Player;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 public class StartFightCommandTest {
     public static final String WINS = " wins";
     @Mock
-    private Console console;
+    private DefaultConsole console;
     @Mock
     private FightDeterminer fightDeterminer;
 

@@ -19,7 +19,7 @@ public class ConsoleTest {
     PrintStream out;
 
     @InjectMocks
-    Console underTest;
+    DefaultConsole underTest;
 
     @Before
     public void setUp() throws Exception {

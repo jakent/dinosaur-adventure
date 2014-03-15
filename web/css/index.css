@@ -1,0 +1,48 @@
+body {
+    background-color: blanchedalmond;
+}
+.centered {
+    background-color: burlywood;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding: 20px;
+}
+textarea {
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+    box-sizing: border-box;
+}
+#output {
+    float: left;
+    width: 65%;
+    height: 120px;
+    border: 10px solid beige;
+}
+#stats {
+    float: right;
+    width: 35%;
+    height: 120px;
+    border: 10px solid beige;
+    border-left: 0;
+}
+input {
+    padding: 5px;
+    margin: 0 0 10px 0;
+    box-sizing: border-box;
+}
+input:focus {
+    outline: none;
+}
+#submitButton {
+    background: #4479BA;
+    color: #FFF;
+    border: 5px solid #4479BA;
+    margin-left: -4px;
+    width: 10%;
+}
+#input {
+    border: 5px solid bisque;
+    width: 90%;
+}

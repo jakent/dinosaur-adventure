@@ -2,7 +2,7 @@ package dinosaurs.command;
 
 import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.factory.DinosaurFactory;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class DisplayDinosaurStatsCommandTest {
     @Mock
     private DinosaurRepository dinosaurRepository;
     @Mock
-    private Console console;
+    private DefaultConsole console;
 
 
     private DisplayDinosaurStatsCommand underTest;

@@ -1,7 +1,7 @@
 package dinosaurs.command;
 
 import dinosaurs.dal.DinosaurRepository;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class CreateDinosaurCommandTest {
 
     @Mock
-    private Console console;
+    private DefaultConsole console;
     @Mock
     private DinosaurRepository dinoRepo;
 
@@ -36,7 +36,7 @@ public class CreateDinosaurCommandTest {
         String dinoName = "Triceratops";
         when(console.prompt(anyString())).thenReturn(dinoName);
         underTest.execute();
-        verify(dinoRepo).createDinosaur(any(Dinosaur.class));
+        verify(dinoRepo).insertDinosaur(any(Dinosaur.class));
     }
 
 }

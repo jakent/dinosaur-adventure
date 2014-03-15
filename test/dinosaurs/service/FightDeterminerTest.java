@@ -2,7 +2,7 @@ package dinosaurs.service;
 
 import dinosaurs.factory.DinosaurFactory;
 import dinosaurs.factory.PlayerFactory;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Player;
 import dinosaurs.model.fight_action.Attack;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class FightDeterminerTest {
     @Mock
-    private Console console;
+    private DefaultConsole console;
 
     private Dinosaur otherDino;
     private Dinosaur userDino;

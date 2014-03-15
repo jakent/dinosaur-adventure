@@ -2,6 +2,7 @@ package dinosaurs.service;
 
 import dinosaurs.Menu;
 import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import dinosaurs.model.Fight;
 import dinosaurs.model.Player;
@@ -13,6 +14,7 @@ public class FightDeterminer {
 
     private final Console console;
 
+    //TODO: This is not a service because we have state
     public Fight startFight(Player user, Player opponent) {
         final Fight fight = new Fight(user.getDinosaur(), opponent.getDinosaur());
 

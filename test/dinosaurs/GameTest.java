@@ -4,7 +4,7 @@ import dinosaurs.command.Command;
 import dinosaurs.command.CommandList;
 import dinosaurs.command.CreateDinosaurCommand;
 import dinosaurs.dal.InMemoryDinosaurRepository;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class GameTest {
     @Mock
-    private Console console;
+    private DefaultConsole console;
     @Mock
     private CommandList commandList;
 

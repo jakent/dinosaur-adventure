@@ -7,7 +7,7 @@ public class InMemoryDinosaurRepository implements DinosaurRepository {
     private Dinosaur dinosaur;
 
     @Override
-    public void createDinosaur(Dinosaur dino) {
+    public void insertDinosaur(Dinosaur dino) {
         dinosaur = dino;
     }
 

@@ -3,16 +3,13 @@ package dinosaurs.command;
 import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.io.Console;
 import dinosaurs.model.Dinosaur;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class DisplayDinosaurStatsCommand implements Command{
 
-    private final DinosaurRepository dinosaurRepository;
     private final Console console;
-
-    public DisplayDinosaurStatsCommand(Console console, DinosaurRepository dinosaurRepository) {
-        this.dinosaurRepository = dinosaurRepository;
-        this.console = console;
-    }
+    private final DinosaurRepository dinosaurRepository;
 
     @Override
     public String getName() {

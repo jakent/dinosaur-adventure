@@ -2,7 +2,7 @@ package dinosaurs.command;
 
 import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.factory.DinosaurFactory;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class EatFoodCommandTest {
     @Mock
     private DinosaurRepository dinoRepo;
     @Mock
-    private Console console;
+    private DefaultConsole console;
     private EatFoodCommand underTest;
     private Dinosaur dino;
 

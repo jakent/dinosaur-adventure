@@ -2,15 +2,13 @@ package dinosaurs.command;
 
 import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.factory.DinosaurFactory;
-import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 import dinosaurs.model.Dinosaur;
-import dinosaurs.model.Fight;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Random;
@@ -22,7 +20,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class GatherFoodCommandTest {
     @Mock
-    private Console console;
+    private DefaultConsole console;
     @Mock
     private DinosaurRepository dinoRepo;
     @Mock

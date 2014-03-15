@@ -4,10 +4,11 @@ import dinosaurs.command.CommandList;
 import dinosaurs.dal.DinosaurRepository;
 import dinosaurs.dal.InMemoryDinosaurRepository;
 import dinosaurs.io.Console;
+import dinosaurs.io.DefaultConsole;
 
 public class Driver {
     public static void main(String[] args){
-        final Console console = new Console(System.in, System.out);
+        final Console console = new DefaultConsole(System.in, System.out);
         final DinosaurRepository dinosaurRepository = new InMemoryDinosaurRepository();
         final CommandList commandList = new CommandList(console, dinosaurRepository);
 
